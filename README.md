@@ -22,6 +22,7 @@
 <img src="https://img.shields.io/badge/Gemini AI-1.5 Flash-4285F4?style=flat-square&logo=google" alt="Gemini"/>
 <img src="https://img.shields.io/badge/PayPal-Orders API v2-003087?style=flat-square&logo=paypal" alt="PayPal"/>
 <img src="https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel" alt="Vercel"/>
+<img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License"/>
 
 <br/><br/>
 
@@ -133,6 +134,108 @@ Hit **"Explore Live Demo"** on the landing page for an instant guided walkthroug
 ### 📄 Export & Audit Trail
 - Download procurement reports as **CSV** and **PDF**
 - Real-time transaction ledger at `/transactions`
+
+---
+
+## 💳 How We Use PayPal
+
+GatherBuy AI integrates the **PayPal Developer Platform** through the **PayPal Orders API v2** to handle real collaborative payments in a group purchasing workflow. Here's exactly how PayPal is used at every stage:
+
+### Order Creation (`POST /api/paypal/create-order`)
+When a group member clicks "Pay My Share," the backend calculates their exact contribution using the deterministic FairShare engine (never a client-provided amount) and calls the PayPal Orders API to create a new order:
+
+```
+POST https://api-m.sandbox.paypal.com/v2/checkout/orders
+{
+  "intent": "CAPTURE",
+  "purchase_units": [{
+    "amount": { "currency_code": "USD", "value": "<member_share>" },
+    "description": "GatherBuy AI — <campaign_name> — <member_name>"
+  }]
+}
+```
+
+- The **PayPal Client Secret** is used server-side to obtain an OAuth Bearer token — it is never exposed to the frontend.
+- The order amount is computed on the server from the campaign's landed cost and the member's proportional allocation — the client cannot manipulate the payment amount.
+
+### Client-Side Approval (PayPal JavaScript SDK)
+The frontend loads the **PayPal JavaScript SDK** (`@paypal/paypal-js`) using the **Sandbox Client ID** (`NEXT_PUBLIC_PAYPAL_CLIENT_ID`). The PayPal buttons are rendered on the join/checkout page. When the member approves the payment in the PayPal popup, the SDK returns the `orderID`.
+
+### Order Capture (`POST /api/paypal/capture-order`)
+After approval, the backend calls PayPal to capture the funds:
+
+```
+POST https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}/capture
+```
+
+- The backend verifies the capture response: `status === "COMPLETED"`, correct `amount`, and correct `currency_code`.
+- Only after this server-side verification is the member's payment recorded in the application database.
+- **Idempotency** is enforced — if a capture is attempted twice for the same member/campaign, the duplicate is safely rejected.
+
+### Transaction Audit Trail
+Every successful PayPal capture is logged with the PayPal Order ID, member name, amount, timestamp, and campaign reference. These are displayed in the `/transactions` audit ledger and can be exported as CSV/PDF.
+
+### Demo Mode
+When PayPal Sandbox credentials are not configured, the app enters a clearly-labelled **Demo Simulation Mode** that generates realistic-looking sample transactions. These are explicitly marked as simulated and never claim to be real PayPal transactions.
+
+**Files:** [`src/lib/paypal/`](src/lib/paypal/) · [`src/app/api/paypal/create-order/`](src/app/api/paypal/create-order/) · [`src/app/api/paypal/capture-order/`](src/app/api/paypal/capture-order/)
+
+---
+
+## 🤖 How We Use AI (Google Gemini)
+
+GatherBuy AI integrates the **Google Gemini API** (`gemini-1.5-flash` model via the `@google/generative-ai` SDK) as an intelligent procurement agent that assists users throughout the group purchasing lifecycle. AI is used meaningfully — not as a gimmick — to solve real problems.
+
+### 1. Natural Language → Structured Campaign (`POST /api/ai/campaign`)
+
+Users describe their purchase in plain English:
+
+> *"We need 25 hoodies, 30 T-shirts, and 50 badges for our college tech fest. Budget is $800. Everything should arrive by November 25."*
+
+The Gemini model parses this into a **structured JSON campaign** validated with Zod:
+
+```json
+{
+  "campaign_name": "Tech Fest Merchandise",
+  "description": "Bulk merchandise procurement for college tech fest",
+  "budget": 800,
+  "deadline": "2026-11-25",
+  "products": [
+    { "name": "Hoodie", "quantity": 25 },
+    { "name": "T-shirt", "quantity": 30 },
+    { "name": "Badge", "quantity": 50 }
+  ],
+  "clarifying_questions": []
+}
+```
+
+When information is missing or ambiguous, the AI asks **clarifying questions** instead of guessing.
+
+### 2. Real-Time AI Advisor (`POST /api/ai/advisor`)
+
+Once a campaign is active, the AI advisor answers questions using **actual campaign data** — supplier quotes, member contributions, budget figures — injected into the prompt context:
+
+- *"Which supplier gives us the best deal and why?"* → AI compares real landed costs
+- *"Can we cut the budget by 15%?"* → AI analyzes feasibility against current quotes
+- *"What risks do you see in this campaign?"* → AI flags MOQ conflicts, tight deadlines, suspiciously low quotes
+- *"How much will each person contribute?"* → AI explains the FairShare allocation
+
+### 3. Procurement Analysis & Recommendations
+
+The AI performs multi-dimensional supplier analysis:
+- Evaluates tradeoffs (lower unit price with higher shipping vs. higher unit price with free shipping)
+- Detects risks: quotes exceeding budget, delivery dates after deadline, MOQ minimums not met
+- Suggests budget optimization strategies
+
+### Critical Design Principle: AI ≠ Calculator
+
+> **All monetary calculations are deterministic and server-side.** The AI model interprets, explains, and recommends — but it never computes authoritative payment amounts. Prices, totals, fees, allocations, and PayPal order amounts are calculated using the FairShare engine (Hare-Niemeyer algorithm) in integer cents.
+
+### Fallback Mode
+
+When the `GEMINI_API_KEY` environment variable is not configured, the app switches to a **deterministic fallback mode** that returns pre-structured responses. This is clearly indicated in the UI so users know AI is not active.
+
+**Files:** [`src/lib/ai/`](src/lib/ai/) · [`src/app/api/ai/campaign/`](src/app/api/ai/campaign/) · [`src/app/api/ai/advisor/`](src/app/api/ai/advisor/)
 
 ---
 
@@ -274,6 +377,14 @@ npx vercel --prod   # manual deploy
 
 **Required environment variables in Vercel:**
 `GEMINI_API_KEY` · `NEXT_PUBLIC_PAYPAL_CLIENT_ID` · `PAYPAL_CLIENT_SECRET` · `PAYPAL_BASE_URL` · `PAYPAL_CURRENCY` · `DEMO_MODE`
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — an [OSI-approved](https://opensource.org/licenses/MIT) open source license.
+
+See the [LICENSE](LICENSE) file for details.
 
 ---
 
