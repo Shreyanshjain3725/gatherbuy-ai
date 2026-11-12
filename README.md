@@ -24,6 +24,14 @@
 
 ---
 
+## 🎬 Demo Video
+
+> 📽️ **[Watch the full product walkthrough →](#)** *(Record your demo and paste the YouTube / Loom link here)*
+>
+> Or explore the **live demo** instantly — no signup needed. Click **"Explore Live Demo"** on the landing page.
+
+---
+
 ## 🌐 Live Application
 
 | | Link |
@@ -42,14 +50,6 @@
 
 ### Procurement Dashboard
 ![GatherBuy AI Dashboard](public/screenshots/dashboard.jpg)
-
----
-
-## 🎬 Demo Video
-
-> 📽️ **[Watch the full product walkthrough →](#)** *(Coming soon — record your demo and paste the link here)*
->
-> Or explore the **live demo** instantly at [gatherbuy-ai.vercel.app](https://gatherbuy-ai.vercel.app) — no signup needed. Click **"Explore Live Demo"** on the landing page.
 
 ---
 
