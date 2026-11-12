@@ -11,7 +11,7 @@
 <br/>
 
 <a href="https://gatherbuy-ai.vercel.app"><img src="https://img.shields.io/badge/🌐  Live App-gatherbuy--ai.vercel.app-10b981?style=for-the-badge&logo=vercel&logoColor=white" alt="Live App"/></a>&nbsp;
-<a href="#-demo-video"><img src="https://img.shields.io/badge/🎬  Demo Video-Watch Now-ef4444?style=for-the-badge&logo=youtube&logoColor=white" alt="Demo Video"/></a>&nbsp;
+<a href="https://youtu.be/LVNN92TVMfs"><img src="https://img.shields.io/badge/🎬  Demo Video-Watch on YouTube-ef4444?style=for-the-badge&logo=youtube&logoColor=white" alt="Demo Video"/></a>&nbsp;
 <a href="https://github.com/Shreyanshjain3725/gatherbuy-ai"><img src="https://img.shields.io/badge/⭐  GitHub-Shreyanshjain3725-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
 
 <br/><br/>
@@ -36,9 +36,11 @@
 
 <div align="center">
 
-> 📽️ **[▶ Watch the full product walkthrough](#)** — *(Record your demo and drop the YouTube / Loom link here)*
+[![GatherBuy AI Demo Walkthrough](https://img.youtube.com/vi/LVNN92TVMfs/maxresdefault.jpg)](https://youtu.be/LVNN92TVMfs)
 
-No video yet? Explore the **live app** directly — no signup required.<br/>
+> 📽️ **[▶ Watch the full product walkthrough on YouTube (2.5 mins)](https://youtu.be/LVNN92TVMfs)**
+
+Or explore the **live app** directly — no signup required.<br/>
 Hit **"Explore Live Demo"** on the landing page for an instant guided walkthrough.
 
 </div>
