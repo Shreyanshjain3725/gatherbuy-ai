@@ -1,37 +1,78 @@
-# GatherBuy AI
-### An Intelligent Agent for Collaborative Purchasing and Payments
+<div align="center">
 
-> **Tagline:** *Buy together. Save together. Pay fairly.*  
-> **Platform:** Enterprise AI Procurement & Collaborative Payments.
+<img src="https://gatherbuy-ai.vercel.app/icon.svg" width="72" height="72" alt="GatherBuy AI Logo" />
+
+# GatherBuy AI
+
+### Group purchasing, intelligently managed.
+
+**One autonomous AI agent to organize your group purchases, compare supplier quotations, calculate fair individual contributions, and simplify PayPal payments.**
+
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-gatherbuy--ai.vercel.app-10b981?style=for-the-badge&logo=vercel&logoColor=white)](https://gatherbuy-ai.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Shreyanshjain3725%2Fgatherbuy--ai-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Shreyanshjain3725/gatherbuy-ai)
+[![Deploy Status](https://img.shields.io/badge/Deploy-Passing-10b981?style=for-the-badge&logo=vercel)](https://vercel.com/shreyanshjain3725/gatherbuy-ai)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)](https://typescriptlang.org/)
+
+<br/>
+
+> **Buy together. Save together. Pay fairly.**
+
+</div>
 
 ---
 
-## 🚀 Overview
+## 🌐 Live Application
 
-Organizing purchases among multiple people is notoriously painful. Group organizers face endless manual friction:
-- Collecting disparate item picks, sizing, and quantity preferences.
-- Contacting suppliers, deciphering minimum order quantities (MOQs), shipping freight, and sales tax quotes.
-- Splitting shared costs (like shipping and tax) fairly without arbitrary rounding discrepancies.
-- Manually following up with participants to collect individual payments.
+| | Link |
+|---|---|
+| 🚀 **Live App** | **[gatherbuy-ai.vercel.app](https://gatherbuy-ai.vercel.app)** |
+| 🎮 **Demo Campaign** | [gatherbuy-ai.vercel.app/join/TECH26](https://gatherbuy-ai.vercel.app/join/TECH26) |
+| 📊 **Dashboard** | [gatherbuy-ai.vercel.app/dashboard](https://gatherbuy-ai.vercel.app/dashboard) |
+| ✨ **New Campaign** | [gatherbuy-ai.vercel.app/campaign/new](https://gatherbuy-ai.vercel.app/campaign/new) |
 
-**GatherBuy AI** automates this entire lifecycle with an end-to-end intelligent agent workflow:
+---
+
+## 📸 Screenshots
+
+### Landing Page
+![GatherBuy AI Landing Page](public/screenshots/hero.jpg)
+
+### Procurement Dashboard
+![GatherBuy AI Dashboard](public/screenshots/dashboard.jpg)
+
+---
+
+## 🎬 Demo Video
+
+> 📽️ **[Watch the full product walkthrough →](#)** *(Coming soon — record your demo and paste the link here)*
+>
+> Or explore the **live demo** instantly at [gatherbuy-ai.vercel.app](https://gatherbuy-ai.vercel.app) — no signup needed. Click **"Explore Live Demo"** on the landing page.
+
+---
+
+## 🧭 Product Walkthrough
+
+The complete GatherBuy AI workflow:
 
 ```
-USER REQUIREMENTS (Natural Language)
+USER REQUIREMENTS  (Natural Language)
         ↓
-AI PROCUREMENT AGENT (Google Gemini SDK)
+AI PROCUREMENT AGENT  (Google Gemini)
         ↓
 STRUCTURED PURCHASE CAMPAIGN
         ↓
-SUPPLIER QUOTATION COMPARISON & LANDED COST INTELLIGENCE
+SUPPLIER QUOTATION COMPARISON & LANDED COST ANALYSIS
         ↓
 AI RECOMMENDATION & RISK AUDITING
         ↓
-FAIRSHARE DETERMINISTIC ENGINE (Hare-Niemeyer Algorithm)
+FAIRSHARE ENGINE  (Hare-Niemeyer Largest-Remainder Algorithm)
         ↓
-MEMBER INVITATIONS & INTERACTIVE SELECTIONS
+MEMBER INVITATIONS & ITEM SELECTIONS
         ↓
-PAYPAL CHECKOUT (PayPal Orders API v2)
+PAYPAL CHECKOUT  (Orders API v2 — Sandbox)
         ↓
 SERVER-SIDE PAYMENT VERIFICATION & IDEMPOTENCY
         ↓
@@ -40,56 +81,46 @@ LIVE PURCHASE PROGRESS & AUDIT TRAIL
 
 ---
 
-## 🌟 Key Features
+## ✨ Key Features
 
-### 1. 🤖 Conversational AI Procurement Agent
-- **Natural Language Understanding:** Converts unstructured prompts (e.g., *"We need 25 hoodies, 30 tees, and 50 badges by Nov 25 with an $800 budget."*) into validated, structured JSON campaigns using Zod.
-- **Clarification:** Asks useful clarifying questions rather than hallucinating missing data.
-- **Interactive Advisor:** Organizers can ask questions in real time:
+### 🤖 Conversational AI Procurement Agent
+- Converts plain English into structured, validated JSON campaigns using Google Gemini + Zod
+- Asks useful clarifying questions rather than hallucinating missing data
+- Real-time AI advisor — ask anything about your campaign:
   - *"Can we reduce the total budget by 15%?"*
   - *"Which supplier is the best option?"*
-  - *"How much will each person need to contribute?"*
-  - *"Can you identify problems in the current campaign?"*
-- **Strict Separation of Concerns:** AI models interpret, explain, and recommend, but **never calculate authoritative monetary sums**. All currency allocations are computed deterministically on the backend.
-- **Zero-Downtime Deterministic Fallback:** Automatically operates cleanly even if a Gemini API key is not configured.
+  - *"How much will each person contribute?"*
+- **AI never controls payment amounts** — all monetary math is deterministic server-side
+- Graceful fallback mode when no Gemini API key is configured
 
-### 2. 📊 Supplier Management & Smart Comparison
-- **True Landed Cost:** Computes `Item Subtotal + Shipping Freight + Sales Tax - Volume Discounts`.
-- **Intelligent Tradeoff Analysis:** Compares suppliers side-by-side (e.g., a $15 unit price with $50 shipping and 10-day lead time vs a $16 unit price with $10 shipping and 4-day delivery).
-- **Ranking Engine:** Tags quotes with **Recommended**, **Lowest Cost**, and **Fastest Turnaround** badges.
-- **MOQ & Deadline Risk Detection:** Warns organizers when aggregate demand fails to meet supplier MOQ minimums.
+### 📊 Smart Supplier Comparison
+- Computes true **landed cost** = `Item Subtotal + Shipping + Tax - Discounts`
+- Side-by-side multi-supplier comparison with **Recommended**, **Lowest Cost**, and **Fastest** badges
+- MOQ & deadline risk detection — warns before you commit
+- Explains tradeoffs: a \$15 unit price + \$50 shipping vs \$16 unit + \$10 shipping
 
-### 3. ⚖️ FairShare Contribution Engine
-- **Deterministic Largest-Remainder Method:** Implements the mathematically verified Hare-Niemeyer algorithm using integer minor currency units (cents).
-- **Zero-Loss Guarantee:** $\sum \text{Member Contributions} \equiv \text{Total Landed Campaign Order}$ without a single cent of rounding drift.
-- **Proportional Fee Allocation:** Divides shared shipping and taxes proportionally based on individual pick value.
-- **Interactive What-If Simulator:** Real-time sliders allow organizers to preview:
-  - Adding extra item quantities.
-  - Switching suppliers.
-  - Simulating members dropping out.
-  - Applying extra negotiated volume discounts.
+### ⚖️ FairShare Contribution Engine
+- **Hare-Niemeyer Largest-Remainder Algorithm** in integer cents — zero rounding drift
+- Mathematically guaranteed: $\sum \text{Member Shares} = \text{Total Order Value}$
+- Proportional freight & tax allocation per member
+- Interactive what-if simulator (switch supplier, change quantity, member drops out)
 
-### 4. 💳 PayPal Sandbox Integration (Critical Requirement)
-- **Official PayPal Orders API v2:** Implements genuine server-side order creation and capture endpoints:
-  - `POST /api/paypal/create-order`
-  - `POST /api/paypal/capture-order`
-- **Server-Side Security:**
-  - PayPal client secrets are never exposed to the frontend.
-  - Client-provided payment amounts are never trusted; backend calculates the authoritative member share.
-  - Strict verification of capture status (`COMPLETED`), amount, and currency.
-  - Idempotent transaction handling to prevent duplicate capture attempts.
-  - Direct non-escrow settlement to the merchant account.
-- **Built-in Demo Simulation Mode:** When PayPal credentials are not present, GatherBuy AI switches to an explicit Demo Simulator mode with sample verified captures and realistic test modals.
+### 💳 PayPal Sandbox Integration
+- Full **PayPal Orders API v2** — server-side order creation + capture
+- Client secret never exposed to the browser
+- Capture verification — only marks paid after Sandbox confirmation
+- Idempotent transaction handling — no duplicate captures
+- Demo simulation mode when credentials are absent (clearly labelled)
 
-### 5. 👥 Participant Invitation & Checkout
-- **Unique Shareable Link & Invite Code** (e.g. `TECH26`).
-- **Interactive Item Picker:** Participants select sizes, colors, and quantities.
-- **Live FairShare Preview:** Computes and displays their exact share before payment.
-- **PayPal Sandbox Checkout:** One-click checkout with instant capture verification and celebratory confetti.
+### 👥 Participant Invitations & Checkout
+- Unique shareable invite link + code (e.g. `TECH26`)
+- Interactive item picker — sizes, colors, quantities
+- Live FairShare preview before payment
+- Confetti celebration on successful PayPal Sandbox checkout
 
-### 6. 📄 Export & Audit Trail
-- Download comprehensive procurement reports in **CSV** and **PDF** formats.
-- Real-time transaction audit ledger at `/transactions`.
+### 📄 Export & Audit Trail
+- Download procurement reports as **CSV** and **PDF**
+- Real-time transaction ledger at `/transactions`
 
 ---
 
@@ -97,103 +128,160 @@ LIVE PURCHASE PROGRESS & AUDIT TRAIL
 
 | Layer | Technologies |
 |---|---|
-| **Framework** | [Next.js](https://nextjs.org/) (App Router, Server API Routes, TypeScript) |
-| **Styling & UI** | [Tailwind CSS](https://tailwindcss.com/), Lucide Icons, Glassmorphism, Custom Theme |
-| **Animation & Charts** | [Framer Motion](https://www.framer.com/motion/), [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) |
-| **Validation** | [Zod](https://zod.dev/) |
-| **Payments** | [PayPal Orders API v2](https://developer.paypal.com/docs/api/orders/v2/), PayPal Sandbox SDK |
-| **AI Model** | [Google Gemini API](https://ai.google.dev/) (`@google/generative-ai`) |
-| **Database** | [Supabase PostgreSQL](https://supabase.com/) (Schema, RLS policies) + Standalone In-Memory Demo Store |
-| **PDF Generation** | [jsPDF](https://www.npmjs.com/package/jspdf), [jspdf-autotable](https://www.npmjs.com/package/jspdf-autotable) |
-| **Testing** | Node.js Test Runner (`node:test`, `node:assert/strict`) |
+| **Framework** | Next.js 14 (App Router, Server API Routes, TypeScript) |
+| **Styling & UI** | Tailwind CSS, Lucide Icons, Glassmorphism, Custom Dark Theme |
+| **Animation** | Framer Motion, Canvas Confetti |
+| **Validation** | Zod |
+| **AI** | Google Gemini API (`@google/generative-ai`) |
+| **Payments** | PayPal Orders API v2, PayPal Sandbox JS SDK |
+| **Database** | Supabase PostgreSQL + In-Memory Demo Store |
+| **Charts** | Recharts |
+| **PDF Export** | jsPDF + jspdf-autotable |
+| **Testing** | Node.js built-in Test Runner |
 
 ---
 
-## ⚙️ Environment Configuration
+## ⚙️ Getting Started
 
-Create a `.env.local` file in the project root (see `.env.example`):
-
+### 1. Clone the repository
 ```bash
-# ====================================================================
-# GatherBuy AI - Environment Configuration
-# ====================================================================
+git clone https://github.com/Shreyanshjain3725/gatherbuy-ai.git
+cd gatherbuy-ai
+```
 
-# Google Gemini API
-GEMINI_API_KEY=your-gemini-api-key
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+Create a `.env.local` file:
+```bash
+# Google Gemini AI
+GEMINI_API_KEY=your-gemini-api-key        # https://aistudio.google.com
 GEMINI_MODEL=gemini-1.5-flash
 
-# PayPal Developer Platform (Sandbox)
+# PayPal Sandbox  — https://developer.paypal.com
 NEXT_PUBLIC_PAYPAL_CLIENT_ID=your-sandbox-client-id
 PAYPAL_CLIENT_SECRET=your-sandbox-client-secret
 PAYPAL_BASE_URL=https://api-m.sandbox.paypal.com
 PAYPAL_CURRENCY=USD
 
-# Supabase PostgreSQL (Optional - In-Memory Demo Store active by default)
+# Supabase (optional — in-memory demo store is active by default)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# Demo Mode Flag
+# App
 DEMO_MODE=true
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-> **Note for Judges:** You can run and evaluate the complete application immediately with zero configuration! GatherBuy AI includes full-fidelity deterministic fallbacks and sample datasets. To test live PayPal Sandbox checkout, add your Sandbox Client ID and Secret to `.env.local`.
+> **No API keys? No problem.** The app runs fully in Demo Mode with realistic sample data and simulated PayPal payments right out of the box.
 
----
-
-## 🚀 Getting Started
-
-### 1. Install Dependencies
-```bash
-npm install
-```
-
-### 2. Run Business Logic Tests
+### 4. Run tests
 ```bash
 node --test test/business-logic.test.mjs
 ```
-*Verifies Hare-Niemeyer largest-remainder allocation, proportional freight distribution, landed cost computation, budget thresholds, and payment lifecycle state transitions.*
 
-### 3. Run Development Server
+### 5. Start development server
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000)
 
-### 4. Build for Production
+### 6. Build for production
 ```bash
-npm run build
-npm start
+npm run build && npm start
 ```
 
 ---
 
-## 🧪 Demonstration Experience
+## 🎮 Demo Experience
 
-GatherBuy AI comes pre-seeded with the flagship showcase campaign:
+The app ships with a pre-seeded flagship campaign:
 
-### **"TechFest 2026 — Merchandise Procurement"** (Invite Code: `TECH26`)
-- **Products:** Heavyweight Hoodies, Poly-Cotton T-shirts, Laser-Etched Enamel Badges.
-- **Participants:** 5 members (Alex Rivera, Samantha Chen, Marcus Vance, Priya Patel, Liam O'Connor).
-- **Quotations:** 3 competing suppliers (Apex Merch Co., PrintCraft Direct, Velocity Express).
-- **Live Status:** $119.41 collected via PayPal Sandbox captures (Alex & Samantha paid); 3 members pending checkout.
-- **Participant Test View:** Navigate to `/join/TECH26` to pick items and trigger PayPal Sandbox checkout.
-- **Reset Button:** Hit **Reset Demo** in the navigation bar anytime to restore the seed dataset to its pristine state.
+### **"TechFest 2026 — Merchandise Procurement"** · Invite Code: `TECH26`
+
+| Detail | Value |
+|---|---|
+| Products | Heavyweight Hoodies, Poly-Cotton T-shirts, Laser-Etched Enamel Badges |
+| Participants | 5 members (Alex Rivera, Samantha Chen, Marcus Vance, Priya Patel, Liam O'Connor) |
+| Suppliers | 3 competing quotes (Apex Merch Co., PrintCraft Direct, Velocity Express) |
+| Status | \$119.41 collected / \$850.00 total — 2 paid, 3 pending |
+| Join Link | [gatherbuy-ai.vercel.app/join/TECH26](https://gatherbuy-ai.vercel.app/join/TECH26) |
+
+Hit **Reset Demo** in the navbar anytime to restore fresh seed data.
 
 ---
 
 ## 🔒 Security & Fintech Standards
 
-1. **Deterministic Monetary Authoritativeness:** AI models are never entrusted with executing or outputting binding transaction amounts. All payment amounts, taxes, and shipping allocations are calculated server-side in integer cents.
-2. **Credential Isolation:** PayPal Client Secret and Supabase Service Role keys remain strictly server-side and are never sent to the browser.
-3. **Capture Verification:** Transactions are only flagged as completed after verified confirmation from PayPal Sandbox Order Capture endpoints.
-4. **Idempotency Protection:** Replay attacks and duplicate capture requests are identified and handled safely.
-5. **No Escrow Misrepresentation:** GatherBuy AI acts as a collaborative ordering agent facilitating direct recipient payments, not an escrow intermediary.
+1. **Deterministic monetary math** — AI never outputs binding amounts; all payment calculations happen server-side in integer cents
+2. **Credential isolation** — PayPal Client Secret and Supabase Service Role key are strictly server-side
+3. **Capture verification** — payments only confirmed after PayPal Sandbox capture response
+4. **Idempotency** — duplicate capture requests are safely detected and rejected
+5. **No escrow** — GatherBuy AI facilitates direct payments, never acts as an escrow intermediary
 
 ---
 
-## 🏢 GatherBuy AI Technologies
+## 📁 Project Structure
 
-*Engineered with precision for modern group commerce.*  
-**GatherBuy AI: Buy together. Save together. Pay fairly.**
+```
+src/
+├── app/
+│   ├── page.tsx                  # Landing page
+│   ├── login/                    # Auth & demo entry
+│   ├── dashboard/                # Main dashboard
+│   ├── campaign/[id]/            # Campaign detail + AI advisor
+│   ├── campaign/[id]/suppliers/  # Supplier comparison
+│   ├── campaign/new/             # AI campaign creator
+│   ├── join/[code]/              # Member invite & checkout
+│   ├── transactions/             # Payment audit ledger
+│   ├── settings/                 # App settings
+│   └── api/                      # Backend API routes
+│       ├── ai/                   # Gemini AI endpoints
+│       ├── campaigns/            # Campaign CRUD
+│       ├── paypal/               # PayPal Orders API v2
+│       ├── fairshare/            # Contribution calculator
+│       └── demo/                 # Demo reset
+├── components/                   # Reusable UI components
+└── lib/
+    ├── ai/                       # Gemini integration
+    ├── db/                       # In-memory store + seed data
+    ├── paypal/                   # PayPal SDK wrapper
+    └── utils/                    # Business logic (deterministic)
+```
+
+---
+
+## 🚀 Deployment
+
+The app is deployed on **Vercel** with automatic deployments on every push to `main`.
+
+```bash
+# Deploy manually
+npx vercel --prod
+```
+
+**Vercel Environment Variables** (set in dashboard or via CLI):
+- `GEMINI_API_KEY`
+- `NEXT_PUBLIC_PAYPAL_CLIENT_ID`
+- `PAYPAL_CLIENT_SECRET`
+- `PAYPAL_BASE_URL`
+- `PAYPAL_CURRENCY`
+- `DEMO_MODE`
+
+---
+
+<div align="center">
+
+**GatherBuy AI** — Intelligent Agent for Group Commerce
+
+[gatherbuy-ai.vercel.app](https://gatherbuy-ai.vercel.app) · [GitHub](https://github.com/Shreyanshjain3725/gatherbuy-ai)
+
+*Buy together. Save together. Pay fairly.*
+
+© 2026 GatherBuy AI Technologies Inc.
+
+</div>
